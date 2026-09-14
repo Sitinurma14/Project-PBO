@@ -12,8 +12,6 @@ import java.util.ArrayList;
 public class CatatanKeuangan {
     private int saldo;
     private ArrayList<String> riwayat;
-    private String keterangan;
-    private int nominal;
     
     public int getSaldo() {
         return this.saldo;

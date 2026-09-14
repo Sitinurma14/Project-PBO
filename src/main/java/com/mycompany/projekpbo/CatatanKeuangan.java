@@ -10,21 +10,46 @@ import java.util.ArrayList;
  * @author AXIOO
  */
 public class CatatanKeuangan {
-    int saldo;
-    ArrayList<String> riwayat;
+    private int saldo;
+    private ArrayList<String> riwayat;
+    private String keterangan;
+    private int nominal;
     
+    public int getSaldo() {
+        return this.saldo;
+    }
+
+    public void setSaldo(int saldo) {
+        if (saldo >= 0) {
+            this.saldo = saldo;
+        } else {
+            System.out.println("Saldo tidak boleh bernilai negatif!");
+        }
+    }
     public CatatanKeuangan() {
-        saldo = 0;
-        riwayat = new ArrayList<>();
+        this.saldo = 0;
+        this.riwayat = new ArrayList<>();
     }
     
     public void tambahPemasukan(String keterangan, int nominal) {
         if (nominal > 0) {
-            saldo += nominal;
-            riwayat.add("[+] " + keterangan + " : Rp " + nominal);
+            this.saldo += nominal;
+            this.riwayat.add("[+] " + keterangan + " : Rp " + nominal);
             System.out.println("Berhasil menambahkan pemasukan sebesar Rp " + nominal);
         } else {
             System.out.println("Nominal pemasukan harus lebih dari 0!");
+        }
+    }
+    
+    public void tambahPengeluaran(String keterangan, int nominal) {
+        if (nominal > 0 && nominal <= this.saldo) {
+            this.saldo -= nominal;
+            this.riwayat.add("[-] " + keterangan + " : Rp " + nominal);
+            System.out.println("Berhasil mencatat pengeluaran sebesar Rp " + nominal);
+        } else if (nominal > this.saldo) {
+            System.out.println("Gagal! Saldo Anda tidak mencukupi.");
+        } else {
+            System.out.println("Nominal pengeluaran harus lebih dari 0!");
         }
     }
 }    
